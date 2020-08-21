@@ -1,5 +1,5 @@
 [package]
-name = "itunesdb-rs"
+name = "itunesdb"
 version = "0.1.0"
 authors = ["Gregory Norton <gregory.norton@me.com>"]
 edition = "2018"
