@@ -24,6 +24,9 @@ impl Chunk for AlbumList {
     }
     
     fn from_bin(buffer: &mut Vec<u8>) -> Result<Box<AlbumList>, Error> {
+        #[cfg(debug_assertions)]
+        let _ = dbg!(std::str::from_utf8(&buffer[0..4]));
+        
         let mut al = AlbumList::new();
         
         for i in 0..4 {
@@ -40,7 +43,7 @@ impl Chunk for AlbumList {
             .unwrap());
         
         buffer.drain(0..(al.hdr_size as usize));
-        for i in 0..al.album_item_count {
+        for _ in 0..al.album_item_count {
             al.album_items.push(*AlbumItem::from_bin(buffer)?);
         }
         

@@ -42,6 +42,9 @@ impl Chunk for DataSet {
     }
     
     fn from_bin(buffer: &mut Vec<u8>) -> Result<Box<DataSet>, Error> {
+        #[cfg(debug_assertions)]
+        let _ = dbg!(std::str::from_utf8(&buffer[0..4]));
+        
         let mut ds = DataSet::new();
         
         for i in 0..4 {

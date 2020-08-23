@@ -22,6 +22,9 @@ impl Chunk for StringDataObject {
     }
     
     fn from_bin(buffer: &mut Vec<u8>) -> Result<Box<StringDataObject>, Error> {
+        #[cfg(debug_assertions)]
+        let _ = dbg!(std::str::from_utf8(&buffer[0..4]));
+        
         let mut strdobj = StringDataObject::new();
         
         for i in 0..4 {

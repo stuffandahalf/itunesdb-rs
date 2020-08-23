@@ -23,7 +23,14 @@ mod tests {
     
     #[test]
     fn bin_to_db_test() {
-        let f = std::fs::File::open("/run/media/ganorton/WD 4TB/iPod Video/iPod_Control/iTunes/iTunesDB");
+        let db_file_path = match std::env::var_os("ITUNESDB") {
+            Some(path) => path,
+            None => {
+                eprintln!("ITUNESDB env variable not defined");
+                return;
+            }
+        };
+        let f = std::fs::File::open(db_file_path);
         let mut f = match f {
             Ok(file) => file,
             Err(_) => {
@@ -55,7 +62,14 @@ mod tests {
     
     #[test]
     fn bin_to_db_to_bin_test() {
-        let f = std::fs::File::open("/run/media/ganorton/WD 4TB/iPod Video/iPod_Control/iTunes/iTunesDB");
+        let db_file_path = match std::env::var_os("ITUNESDB") {
+            Some(path) => path,
+            None => {
+                eprintln!("ITUNESDB env variable not defined");
+                return;
+            }
+        };
+        let f = std::fs::File::open(db_file_path);
         let mut f = match f {
             Ok(file) => file,
             Err(_) => {
